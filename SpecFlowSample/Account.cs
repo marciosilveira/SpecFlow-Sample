@@ -15,15 +15,8 @@
             Limit = limit;
         }
 
-        private bool CanWithdraw(double value)
-        {
-            return value <= Balance;
-        }
-
-        private bool CanDeposit(double value)
-        {
-            return value + Balance <= Limit;
-        }
+        private bool CanWithdraw(double value) => value <= Balance;
+        private bool CanDeposit(double value) => value + Balance <= Limit;
 
         public bool Withdraw(double value)
         {

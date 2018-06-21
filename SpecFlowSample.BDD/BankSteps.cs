@@ -13,34 +13,20 @@ namespace SpecFlowSample.BDD
         private double _totalCashBank;
 
         [Given(@"que as contas sao do ""(.*)""")]
-        public void DadoQueAsContasSaoDo(string bankName, Table table)
-        {
-            _bank = new Bank(bankName, new List<Account>());
-        }
+        public void DadoQueAsContasSaoDo(string bankName, List<Account> accounts) => _bank = new Bank(bankName, accounts);
 
         [Given(@"o calculo do total de contas criadas")]
-        public void DadoOCalculoDoTotalDeContasCriadas()
-        {
-            _totalAccount = _bank.Accounts.Count;
-        }
+        public void DadoOCalculoDoTotalDeContasCriadas() => _totalAccount = _bank.Accounts.Count;
 
         [Given(@"o calculo do total de dinheiro")]
-        public void DadoOCalculoDoTotalDeDinheiro()
-        {
-            _totalCashBank = _bank.Accounts.Sum(o => o.Balance);
-        }
+        public void DadoOCalculoDoTotalDeDinheiro() => _totalCashBank = _bank.Accounts.Sum(o => o.Balance);
 
         [Then(@"o total de contas e (.*)")]
-        public void EntaoOTotalDeContasE(int totalAccount)
-        {
-            Assert.AreEqual(totalAccount, _totalAccount, "O cálculo do total de contas está incorreto");
-        }
+        public void EntaoOTotalDeContasE(int totalAccount) => Assert.AreEqual(totalAccount, _totalAccount,
+            "O cálculo do total de contas está incorreto");
 
         [Then(@"o total de dinheiro no banco e (.*)")]
-        public void EntaoOTotalDeDinheiroNoBancoE(int totalCashBank)
-        {
-            Assert.AreEqual(totalCashBank, _totalCashBank,
-                $"O cálculo do total de dinheiro no banco { _bank.Name } está incorreto");
-        }
+        public void EntaoOTotalDeDinheiroNoBancoE(int totalCashBank) => Assert.AreEqual(totalCashBank, _totalCashBank,
+            $"O cálculo do total de dinheiro no banco { _bank.Name } está incorreto");
     }
 }
